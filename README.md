@@ -1,0 +1,1 @@
+# HandDryerController-proofs
