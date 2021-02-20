@@ -78,6 +78,32 @@ intro.
 apply H.
 Qed.
 
+Lemma natlike_upper_bound_rec :
+ forall (x : Z) (P:Z -> Set),
+   P 0 ->
+   (forall y:Z, 0 <= y<x -> P y -> P (Z.succ y)) ->
+   forall y:Z, 0 <= y<=x -> P y.
+Proof.
+intros.
+inversion_clear H1.
+generalize H3.
+generalize H2.
+assert (Hle_0_x : 0<=x -> P 0).
+intros.
+assumption.
+apply natlike_rec with (fun y => (y<=x -> P y)) y in Hle_0_x.
+intro.
+assumption.
+intros.
+assert (Hlt_x0_x : x0<x).
+auto with zarith.
+apply H0.
+split; assumption.
+apply H4.
+auto with zarith.
+assumption.
+Qed.
+
 Definition ind_prove_pred (dryer : array bool) (x y l : Z) : Prop := 
 (forall k, (x<=k /\ k<l -> dryer.[of_Z k]=ON /\ hands1.[of_Z k]=OFF)) -> 
  exists j, (l<=j /\ j <=y /\ (forall k, (x<=k /\ k<j -> dryer.[of_Z k]=ON /\  hands1.[of_Z k]=OFF)) /\   

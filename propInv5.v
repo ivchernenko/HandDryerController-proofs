@@ -3,7 +3,7 @@ Local Open Scope Z.
 
 Definition propInv5 (hands dryer : array bool) (ctrlState : array nat) (ctrlTimer timer : Z) : Prop := 
  forall i, (0<i /\ i<=timer-(36000-1) /\ dryer.[of_Z i]=ON -> 
-   exists j, (i<=j /\ j<i+(36000-1) /\ (forall k, (i<=k /\ k<j -> dryer.[of_Z k]=ON)) /\ dryer.[of_Z j]=OFF)).
+   exists j, (i<=j /\ j<=i+(36000-1) /\ (forall k, (i<=k /\ k<j -> dryer.[of_Z k]=ON)) /\ dryer.[of_Z j]=OFF)).
 
 Definition inv (hands dryer : array bool) (ctrlState : array nat) (ctrlTimer timer : Z) : Prop := 
  (propInv5 hands dryer ctrlState ctrlTimer timer) /\ (extraInv hands dryer ctrlState ctrlTimer timer).

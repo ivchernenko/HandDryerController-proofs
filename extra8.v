@@ -1,5 +1,6 @@
 Require Import extraInv.
 Require Import verif_cond_8.
+Local Open Scope Z.
 
 Theorem extra8: (commonStartnewloop hands0 hands1 dryer0 dryer1 ctrlState0 ctrlState1 ctrlTimer0 ctrlTimer1 timer0 timer1) /\ 
   cond8 -> False.

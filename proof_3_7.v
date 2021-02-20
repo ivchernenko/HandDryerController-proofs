@@ -1,13 +1,15 @@
 Require Import propInv3.
 Require Import verif_cond_7.
+Require Import extra7.
 Require Import ind_scheme.
 Local Open Scope Z.
 
-Theorem t3_7: (startnewloop hands0 hands1 dryer0 dryer1 ctrlState0 ctrlState1 ctrlTimer0 ctrlTimer1 timer0 timer1) /\ cond7 -> 
- (propInv3 hands1 dryer1 ctrlState1 ctrlTimer1 timer1).
+Theorem proof3_7: (startnewloop hands0 hands1 dryer0 dryer1 ctrlState0 ctrlState1 ctrlTimer0 ctrlTimer1 timer0 timer1) /\ cond7 -> 
+ (inv hands1 dryer1 ctrlState1 ctrlTimer1 timer1).
 
 Proof.
 intros.
+split.
 unfold propInv3.
 inversion_clear H.
 inversion_clear H1.
@@ -143,5 +145,14 @@ left.
 assumption.
 assumption.
 apply H3.
+
+apply extra7.
+split.
+inversion_clear H.
+inversion_clear H0.
+split.
+apply H.
+assumption.
+apply H.
 Qed.
 

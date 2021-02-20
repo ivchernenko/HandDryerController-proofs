@@ -1,13 +1,15 @@
  Require Import propInv3.
 Require Import verif_cond_3.
+Require Import extra3.
 Require Import ind_scheme.
 Local Open Scope Z.
 
-Theorem t3_3: (startnewloop hands0 hands1 dryer0 dryer1 ctrlState0 ctrlState1 ctrlTimer0 ctrlTimer1 timer0 timer1) /\ cond3 ->
- (propInv3 hands1 dryer2 ctrlState1 ctrlTimer1 timer1).
+Theorem proof3_3: (startnewloop hands0 hands1 dryer0 dryer1 ctrlState0 ctrlState1 ctrlTimer0 ctrlTimer1 timer0 timer1) /\ cond3 ->
+ (inv hands1 dryer2 ctrlState1 ctrlTimer1 timer1).
 
 Proof.
 intros.
+split.
 unfold propInv3.
 inversion_clear H.
 inversion_clear H1.
@@ -48,7 +50,7 @@ auto with zarith.
 apply H2.
 (*case i=timer1-(11-1)*)
 intros.
-(*inductive proof*).
+(*inductive proof*)
 assert (Hdryer_hands : (forall k, (i<=k /\ k<i -> dryer2.[of_Z k]=ON /\ hands1.[of_Z k]=OFF))).
 intros.
 elimtype False.
@@ -147,4 +149,13 @@ left.
 assumption.
 assumption.
 apply H2.
+
+apply extra3.
+split.
+inversion_clear H.
+inversion_clear H0.
+split.
+apply H.
+assumption.
+apply H.
 Qed.

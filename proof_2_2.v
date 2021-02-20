@@ -1,13 +1,15 @@
 Require Import propInv2.
 Require Import verif_cond_2.
+Require Import extra2.
 Local Open Scope Z.
 
 
-Theorem t2_2: (startnewloop hands0 hands1 dryer0 dryer1 ctrlState0 ctrlState1 ctrlTimer0 ctrlTimer1 timer0 timer1) /\ cond2-> 
- (propInv2 hands1 dryer2 ctrlState2 ctrlTimer2 timer1).
+Theorem proof2_2: (startnewloop hands0 hands1 dryer0 dryer1 ctrlState0 ctrlState1 ctrlTimer0 ctrlTimer1 timer0 timer1) /\ cond2-> 
+ (inv  hands1 dryer2 ctrlState2 ctrlTimer2 timer1).
 
 Proof.
 intros.
+split.
 unfold propInv2.
 inversion_clear H.
 inversion_clear H1.
@@ -43,4 +45,12 @@ contradict H8.
 discriminate.
 inversion_clear H3.
 assumption.
+apply extra2.
+split.
+inversion_clear H.
+inversion_clear H0.
+split.
+apply H.
+assumption.
+apply H.
 Qed.

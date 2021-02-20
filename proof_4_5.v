@@ -1,12 +1,14 @@
 Require Import propInv4.
 Require Import verif_cond_5.
+Require Import extra5.
 Local Open Scope Z.
 
-Theorem t4_5: (startnewloop hands0 hands1 dryer0 dryer1 ctrlState0 ctrlState1 ctrlTimer0 ctrlTimer1 timer0 timer1) /\ cond5 ->
- (propInv4 hands1 dryer1 ctrlState2 ctrlTimer2 timer1).
+Theorem proof4_5: (startnewloop hands0 hands1 dryer0 dryer1 ctrlState0 ctrlState1 ctrlTimer0 ctrlTimer1 timer0 timer1) /\ cond5 ->
+ (inv hands1 dryer1 ctrlState2 ctrlTimer2 timer1).
 
 Proof.
 intros.
+split.
 unfold propInv4.
 inversion_clear H.
 inversion_clear H1.
@@ -46,4 +48,12 @@ assumption.
 apply dryer_inf.
 inversion_clear H5.
 assumption.
+apply extra5.
+split.
+inversion_clear H.
+inversion_clear H0.
+split.
+apply H.
+assumption.
+apply H.
 Qed.

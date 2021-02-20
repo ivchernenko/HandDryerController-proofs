@@ -41,7 +41,7 @@ intros.
 rewrite H1 in H3.
 rewrite H0 in H3.
 rewrite get_set_same in H3.
-eontradict H3.
+contradict H3.
 discriminate.
 apply ctrlState_inf.
 Qed.
